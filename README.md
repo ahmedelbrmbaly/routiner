@@ -75,3 +75,30 @@
       );
 
     ```
+
+- Create indexes
+
+  - ```
+    CREATE UNIQUE INDEX user_id
+      ON users (id);
+    ```
+
+  - ```
+    CREATE UNIQUE INDEX user_name
+      ON users (user_name);
+    ```
+
+  - ```
+    CREATE UNIQUE INDEX routine_id
+      ON routines (id);
+    ```
+
+  - ```
+    CREATE UNIQUE INDEX logs_id
+      ON logs (id);
+    ```
+
+  - ```
+    CREATE UNIQUE INDEX status_id
+      ON status (id);
+    ```
