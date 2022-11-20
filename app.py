@@ -2,7 +2,7 @@
 # import os
 
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect,  render_template, request, session, url_for
 from flask_session import Session
 # from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -23,7 +23,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-# db = SQL("sqlite:///finance.db")
+db = SQL("sqlite:///routiner.db")
 
 
 
@@ -59,11 +59,12 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
+        
+        rows = db.execute("SELECT * FROM users WHERE user_name = ?", request.form.get("username"))
 
-        # rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
-
-        # if not request.form.get("username") or len(rows) == 1:
-        #     return apology("Username is not available", 400)
+        if not request.form.get("username") or len(rows) <= 1:
+            flash("Username is not available")
+            return redirect(url_for('register'))
 
 
         # elif not request.form.get("password") or request.form.get("password") != request.form.get("confirmation"):
@@ -78,8 +79,9 @@ def register():
         #     session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-            return redirect("/")
+            # return redirect("/")
 
         # Ensure username exists and password is correct
     else:
+      
         return render_template("register.html")
