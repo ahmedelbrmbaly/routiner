@@ -102,3 +102,7 @@
     CREATE UNIQUE INDEX status_id
       ON status (id);
     ```
+
+# ِApp notes
+
+- `pyIsEmail` library used to validate email address

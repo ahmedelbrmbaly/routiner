@@ -9,6 +9,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helper import login_required
 
+from pyisemail import is_email
+
+
 # Configure application
 app = Flask(__name__)
 
@@ -39,7 +42,7 @@ def after_request(response):
 @login_required
 def index():
 
-  return render_template("layout.html")
+  return render_template("index.html")
 
 
 
@@ -60,28 +63,38 @@ def logout():
 def register():
     if request.method == "POST":
         
-        rows = db.execute("SELECT * FROM users WHERE user_name = ?", request.form.get("username"))
+        rows1 = db.execute("SELECT * FROM users WHERE user_name = ?", request.form.get("username"))
 
-        if not request.form.get("username") or len(rows) <= 1:
+        rows2 = db.execute("SELECT * FROM users WHERE email = ?", request.form.get("email"))
+
+        if not (request.form.get("username") or len(rows1) == 0):
             flash("Username is not available")
             return redirect(url_for('register'))
 
 
-        # elif not request.form.get("password") or request.form.get("password") != request.form.get("confirmation"):
-        #     return apology("must provide password and confirm it" , 400)
-        # else:
-        #     db.execute("INSERT INTO users(username, hash) VALUES(?,?)",
-        #                 request.form.get("username"), generate_password_hash(request.form.get("username")))
+        elif not (request.form.get("password") or request.form.get("password") != request.form.get("confirmation")):
+            flash("Must provide a password and confirm it")
+            return redirect(url_for('register'))
+        
+        
+        elif not (request.form.get("email") or is_email(request.form.get("email"), check_dns=True) or len(rows2) == 0):
+            flash("Email address is not available")
+            return redirect(url_for('register'))
 
-        #     rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        
 
-        #      # Remember which user has logged in
-        #     session["user_id"] = rows[0]["id"]
+
+        else:
+            db.execute("INSERT INTO users(user_name, password, email) VALUES(?,?,?)", request.form.get("username"), generate_password_hash(request.form.get("password")), request.form.get("email"))
+
+            rows = db.execute("SELECT * FROM users WHERE user_name = ?", request.form.get("username"))
+
+            #  Remember which user has logged in
+            session["user_id"] = rows[0]["ID"]
 
         # Redirect user to home page
-            # return redirect("/")
-
-        # Ensure username exists and password is correct
+            return redirect("/")
+        
     else:
       
         return render_template("register.html")
