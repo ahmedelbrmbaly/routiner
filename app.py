@@ -67,22 +67,19 @@ def register():
 
         rows2 = db.execute("SELECT * FROM users WHERE email = ?", request.form.get("email"))
 
-        if not (request.form.get("username") or len(rows1) == 0):
+        if not request.form.get("username") or len(rows1) != 0:
             flash("Username is not available")
             return redirect(url_for('register'))
 
 
-        elif not (request.form.get("password") or request.form.get("password") != request.form.get("confirmation")):
+        elif not request.form.get("password") or request.form.get("password") != request.form.get("confirmation"):
             flash("Must provide a password and confirm it")
             return redirect(url_for('register'))
         
         
-        elif not (request.form.get("email") or is_email(request.form.get("email"), check_dns=True) or len(rows2) == 0):
+        elif not request.form.get("email") or not is_email(request.form.get("email"), check_dns=True) or len(rows2) != 0:
             flash("Email address is not available")
             return redirect(url_for('register'))
-
-        
-
 
         else:
             db.execute("INSERT INTO users(user_name, password, email) VALUES(?,?,?)", request.form.get("username"), generate_password_hash(request.form.get("password")), request.form.get("email"))
@@ -92,9 +89,10 @@ def register():
             #  Remember which user has logged in
             session["user_id"] = rows[0]["ID"]
 
-        # Redirect user to home page
-            return redirect("/")
-        
+            # Redirect user to home page
+            # flash("submitted")
+            # return redirect(url_for('register'))  
+            return redirect("/")      
     else:
       
         return render_template("register.html")
