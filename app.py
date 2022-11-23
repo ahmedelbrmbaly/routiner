@@ -45,20 +45,6 @@ def index():
   return render_template("index.html")
 
 
-
-@app.route("/logout")
-@login_required
-def logout():
-    """Log user out"""
-
-    # Forget any user_id
-    session.clear()
-
-    # Redirect user to login form
-    return redirect("/")
-
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -96,3 +82,41 @@ def register():
     else:
       
         return render_template("register.html")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        if not request.form.get("username") or not request.form.get("password"):
+            flash("Invalid Username and/or Password")
+            return redirect(url_for('login'))
+
+        rows = db.execute("SELECT * FROM users WHERE user_name = ?", request.form.get("username"))
+
+        if len(rows) != 1 or not check_password_hash(rows[0]["password"], request.form.get("password")):
+            flash("Invalid Username and/or Password")
+            return redirect(url_for('login'))
+
+        session["user_id"] = rows[0]["ID"]
+
+        return redirect("/")
+
+        
+
+    else:
+
+        return render_template("login.html")
+
+        
+
+@app.route("/logout")
+@login_required
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
+

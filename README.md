@@ -106,3 +106,9 @@
 # ِApp notes
 
 - `pyIsEmail` library used to validate email address
+
+# Templates
+
+- [x] Index
+- [x] Registration
+- [x] Login
