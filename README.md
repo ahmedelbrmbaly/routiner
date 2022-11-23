@@ -112,3 +112,4 @@
 - [x] Index
 - [x] Registration
 - [x] Login
+- [x] Profile

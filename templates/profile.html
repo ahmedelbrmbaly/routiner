@@ -1,0 +1,69 @@
+{% extends "layout.html" %} {% block title %} Profile {% endblock %} {% block
+main %}
+
+<!-- regsrtation form -->
+<br />
+<h4>Change Profile Details</h4>
+<br />
+<form action="/profile" method="post">
+  <div class="mb-3">
+    <label> Current username</label>
+    <br />
+    <br />
+    <input autocomplete="off" autofocus disabled class="form-control mx-auto
+    w-auto" name="curernt_username" placeholder={{row["user_name"]}} type="text"
+    />
+    <br />
+
+    <input
+      autocomplete="off"
+      autofocus
+      class="form-control mx-auto w-auto"
+      name="username"
+      placeholder="New Username"
+      type="text"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label> Current Email</label>
+    <br />
+    <br />
+    <input autocomplete="off" autofocus disabled class="form-control mx-auto
+    w-auto" name="curernt_email" placeholder={{row["email"]}} type="text" />
+    <br />
+
+    <input
+      autocomplete="off"
+      autofocus
+      class="form-control mx-auto w-auto"
+      name="email"
+      placeholder="New Email"
+      type="text"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label> Change Password</label>
+    <br />
+    <br />
+    <input
+      class="form-control mx-auto w-auto"
+      name="password"
+      placeholder="New Password"
+      type="password"
+    />
+  </div>
+
+  <div class="mb-3">
+    <input
+      class="form-control mx-auto w-auto"
+      name="confirmation"
+      placeholder="New Password (again)"
+      type="password"
+    />
+  </div>
+
+  <button class="btn btn-primary" type="submit">Change Profile Details</button>
+</form>
+{% endblock %}

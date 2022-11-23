@@ -98,6 +98,8 @@ def login():
             return redirect(url_for('login'))
 
         session["user_id"] = rows[0]["ID"]
+        session["user_name"] = rows[0]["user_name"]
+        
 
         return redirect("/")
 
@@ -119,4 +121,54 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+
+
+
+@app.route("/profile", methods=["GET", "POST"])
+@login_required
+def profile():
+    rows = db.execute("SELECT * FROM users WHERE ID = ?", session["user_id"])
+    row= rows[0]
+    newRow = rows[0]
+
+    if request.method == "POST":
+
+        
+        if request.form.get("username"):
+
+            rows1 = db.execute("SELECT * FROM users WHERE user_name = ?", request.form.get("username"))
+
+            if len(rows1) != 0:
+                flash("Username is not available")
+                return redirect(url_for('profile'))
+            newRow["user_name"] = request.form.get("username")
+        
+        if request.form.get("email"):
+
+            rows2 = db.execute("SELECT * FROM users WHERE email = ?", request.form.get("email"))
+
+
+
+            if len(rows2) != 0 or not is_email(request.form.get("email"), check_dns=True):
+                flash("Email is not available")
+                return redirect(url_for('profile'))
+            newRow["email"] = request.form.get("email")
+        
+        if request.form.get("password") or request.form.get("confirmation"):
+
+           
+            if request.form.get("password") != request.form.get("confirmation"):
+                flash("Must provide a password and confirm it")
+                return redirect(url_for('profile'))
+            newRow["password"] = generate_password_hash(request.form.get("password"))
+
+        db.execute("UPDATE users set user_name=?, password = ?, email=? where ID=?", newRow["user_name"], newRow[("password")], newRow["email"], newRow["ID"])
+        flash("Changes were saved!")
+        return render_template("profile.html", row=row)
+
+        
+
+    else:
+        
+        return render_template("profile.html", row=row)
 
