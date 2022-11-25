@@ -6,16 +6,12 @@
 
 <img src="Database schema - Copy.drawio.png">
 
-# Database Deigning - Heavy Version
-
-(I found it very complicated to implement this version of the app so I implemeted a light version)
-
-<img src="Database schema.drawio.png">
+# Database configration - Light version
 
 - Create Tables:
 
   - ```
-    CREATE TABLE userss(
+    CREATE TABLE users(
         ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
         user_name TEXT NOT NULL UNIQUE,
         email TEXT NOT NULL UNIQUE,
@@ -55,6 +51,12 @@
       );
 
   ```
+
+  # Database Deigning - Heavy Version
+
+(I found it very complicated to implement this version of the app so I implemeted a light version)
+
+<img src="Database schema.drawio.png">
 
 # Database configration - heavy version
 
