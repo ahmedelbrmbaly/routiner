@@ -1,0 +1,63 @@
+{% extends "layout.html" %} {% block title %} Add {% endblock %} {% block main%}
+
+<!-- add form -->
+<br />
+<label> Add New Task</label>
+<br /><br />
+<form action="/add" method="post">
+  <div class="mb-3">
+    <input
+      required
+      autocomplete="off"
+      autofocus
+      class="form-control mx-auto w-auto"
+      name="name"
+      placeholder="Enter Task Name"
+      type="text"
+    />
+  </div>
+
+  <div class="mb-3">
+    <textarea
+      name="description"
+      class="form-control mx-auto w-auto"
+      aria-label="With textarea"
+      spellcheck="false"
+      placeholder="Enter Task Description"
+    ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <select
+      class="form-select mb-3 mx-auto w-auto"
+      name="priority"
+      id="priority"
+    >
+      <option disabled selected value="priority">Priority</option>
+      <option value="1">1</option>
+      <option value="1">2</option>
+
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <input required class="form-control mx-auto w-auto"
+    onfocus="(this.type='date')" type=text" id="start-date" name="start-date"
+    placeholder="Enter Start date" />
+  </div>
+
+  <div class="mb-3">
+    <select class="form-select mx-auto w-auto" name="status" id="status1">
+      <option value="done-on-time">Done-On-Time</option>
+      <option value="done">Done</option>
+      <option selected value="not-set">Not-Set</option>
+      <option value="missed">Missed</option>
+    </select>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Add</button>
+</form>
+{% endblock %}

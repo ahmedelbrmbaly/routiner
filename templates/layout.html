@@ -89,19 +89,20 @@
               >Home</a
             > -->
             </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link" href="#">DashBoard</a>
-            </li> -->
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+              <a class="nav-link" href="{{ url_for('add') }}">Add</a>
             </li>
 
             <!-- <li class="nav-item">
               <a class="nav-link disabled">Disabled</a>
             </li> -->
           </ul>
+
           <ul class="navbar-nav ms-auto mt-2">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Log Out</a>
             </li>
