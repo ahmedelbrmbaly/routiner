@@ -1,10 +1,62 @@
 # Routiner
 
-# Database Deigning
+# Database Deigning - Light Version
+
+(I found it very complicated to implement this version of the app so I implemeted a light version)
+
+<img src="Database schema - Copy.drawio.png">
+
+# Database Deigning - Heavy Version
+
+(I found it very complicated to implement this version of the app so I implemeted a light version)
 
 <img src="Database schema.drawio.png">
 
-# Database configration
+- Create Tables:
+
+  - ```
+    CREATE TABLE userss(
+        ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+        user_name TEXT NOT NULL UNIQUE,
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL
+      );
+
+    ```
+
+- ```
+    CREATE TABLE routines(
+        ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+        user_id INTEGER NOT NULL,
+        name TEXT NOT NULL,
+        description TEXT,
+        priority INT,
+        start_date DATETIME NOT NULL,
+        end_date DATETIME,
+        status text,
+
+        CONSTRAINT fk_user_id
+          FOREIGN KEY (user_id)
+          REFERENCES users(id),
+
+        CONSTRAINT CHK_Name
+        CHECK (
+                status = "Done-On-Time"
+                OR status = "Done"
+                OR status = "Not-Set"
+                OR status = "Missed"),
+
+        CONSTRAINT CHK_Priority
+        CHECK(
+              priority>=1
+              AND priority<=5)
+
+
+      );
+
+  ```
+
+# Database configration - heavy version
 
 - Create Tables:
 
@@ -102,6 +154,17 @@
     CREATE UNIQUE INDEX status_id
       ON status (id);
     ```
+
+- ```
+  ALTER TABLE routines RENAME COLUMN weight To priority;
+  ```
+
+- I have to edit the database but the sqlite doesn't support and I lazy to drop the table and create it again 😂
+
+  ```
+    ALTER TABLE routines
+    add check(priority>=1 and priority<=5>);
+  ```
 
 # ِApp notes
 

@@ -11,6 +11,9 @@ from helper import login_required
 
 from pyisemail import is_email
 
+import calendar
+
+
 
 # Configure application
 app = Flask(__name__)
@@ -28,6 +31,9 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///routiner.db")
 
+
+#set firstweekday=0
+cal= calendar.Calendar(firstweekday=5)
 
 
 @app.after_request
@@ -171,4 +177,7 @@ def profile():
     else:
         
         return render_template("profile.html", row=row)
+
+
+
 
