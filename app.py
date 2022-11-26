@@ -11,6 +11,9 @@ from helper import login_required
 
 from pyisemail import is_email
 
+from datetime import datetime
+
+
 import calendar
 
 
@@ -176,16 +179,44 @@ def profile():
 @app.route("/")
 @login_required
 def index():
+    rows = db.execute("SELECT * FROM routines WHERE user_id = ?", session["user_id"])
+   
+    return render_template("index.html", rows=rows )
 
-  return render_template("index.html")
 
 
-
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
+    status = ["Done On Time", "Done","Not Set", "Missed"]
 
-  return render_template("add.html")
+    if request.method == "POST":
+        newRoutine = {}
+        newRoutine["user_id"] = session["user_id"]
+        if not request.form.get("name"):
+            flash("Please Enter Task Name")
+            return redirect(url_for('add'))
+        else:
+            newRoutine["name"] = request.form.get("name")
+            
+            newRoutine["description"] = request.form.get("description") if request.form.get("description") else ""
+            
+            if not request.form.get("priority"):
+               newRoutine["priority"] = 1
+            elif request.form.get("priority").isdigit() and int( request.form.get("priority")) > 0  and int( request.form.get("priority")) < 6:
+                newRoutine["priority"] = int(request.form.get("priority"))
+
+            else:
+                 newRoutine["priority"] = 1
+                
+
+            newRoutine["start-date"] = request.form.get("start-date") if request.form.get("start-date") else datetime.now().strftime('%Y-%m-%d')
+            newRoutine["status"] = request.form.get("status") if request.form.get("status") in status else "Not-Set"
+        db.execute("INSERT INTO routines(user_id, name, description, priority,start_date, status ) VALUES(?,?,?,?,?,?)",newRoutine["user_id"], newRoutine["name"], newRoutine["description"], newRoutine["priority"], newRoutine["start-date"], newRoutine["status"])
+
+        return redirect("/")      
+    else:
+        return render_template("add.html")
 
 
 

@@ -2,8 +2,6 @@
 
 <!-- add form -->
 <br />
-<label> Add New Task</label>
-<br /><br />
 <form action="/add" method="post">
   <div class="mb-3">
     <input
@@ -33,7 +31,7 @@
       name="priority"
       id="priority"
     >
-      <option disabled selected value="priority">Priority</option>
+      <option disabled selected value="priority">Select Priority</option>
       <option value="1">1</option>
       <option value="1">2</option>
 
@@ -44,20 +42,21 @@
   </div>
 
   <div class="mb-3">
-    <input required class="form-control mx-auto w-auto"
-    onfocus="(this.type='date')" type=text" id="start-date" name="start-date"
-    placeholder="Enter Start date" />
+    <input class="form-control mx-auto w-auto" onfocus="(this.type='date')"
+    type=text" id="start-date" name="start-date" placeholder="Select Start Date"
+    />
   </div>
 
   <div class="mb-3">
     <select class="form-select mx-auto w-auto" name="status" id="status1">
+      <option disabled selected value="Status">Select Status</option>
       <option value="done-on-time">Done-On-Time</option>
       <option value="done">Done</option>
-      <option selected value="not-set">Not-Set</option>
+      <option value="not-set">Not-Set</option>
       <option value="missed">Missed</option>
     </select>
   </div>
 
-  <button class="btn btn-primary" type="submit">Add</button>
+  <button class="btn btn-dark" type="submit">Add</button>
 </form>
 {% endblock %}

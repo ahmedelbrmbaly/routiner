@@ -9,101 +9,141 @@ main%}
     <th class="text-center">Start Date</th>
     <th class="text-center">End Date</th>
     <th class="text-center">Status</th>
+    <th class="text-center">Save</th>
     <th class="text-center">Edit</th>
     <th class="text-center">Delete</th>
   </thead>
 
   <tbody>
-    <td class="table-dark">
-      <!-- <button type="button" class="btn btn-dark">Dark</button> -->
-      <a href="#" class="btn btn-dark">Secondary</a>
-    </td>
+    {% for row in rows:%}
+    <tr>
+      <td class="table-dark">
+        <a href="#" class="btn btn-dark">{{row["name"]}}</a>
+      </td>
 
-    <td class="text-center">
-      <div class="accordion-item">
-        <h4 class="accordion-header" id="headingTwo">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseTwo"
-            aria-expanded="false"
-            aria-controls="collapseTwo"
+      <td class="text-center">
+        <div class="accordion-item">
+          <h4 class="accordion-header" id="headingTwo">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              View Description
+            </button>
+          </h4>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
           >
-            View Description
-          </button>
-        </h4>
-        <div
-          id="collapseTwo"
-          class="accordion-collapse collapse"
-          aria-labelledby="headingTwo"
-          data-bs-parent="#accordionExample"
-          style=""
-        >
-          <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is
-            hidden by default, until the collapse plugin adds the appropriate
-            classes that we use to style each element. These classes control the
-            overall appearance, as well as the showing and hiding via CSS
-            transitions. You can modify any of this with custom CSS or
-            overriding our default variables. It's also worth noting that just
-            about any HTML can go within the <code>.accordion-body</code>,
-            though the transition does limit overflow.
+            <div class="accordion-body">{{row["description"]}}</div>
           </div>
         </div>
-      </div>
-    </td>
+      </td>
 
-    <td class="text-center">
-      <select class="form-select" name="status" id="status1">
-        <option disabled selected value="degree">Priority</option>
-        <option value="1">1</option>
-        <option value="1">2</option>
+      <td class="text-center">
+        <select class="form-select" name="priority" id="priority1">
+          {%if row["priority"] == 1: %}
+          <option disabled value="Priority">Priority</option>
+          <option selected value="1">1</option>
+          <option value="1">2</option>
 
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </td>
-    <td class="text-center">
-      <input
-        type="date"
-        id="start"
-        name="trip-start"
-        value="2018-07-22"
-        min="2018-01-01"
-        max="2018-12-31"
-        disabled
-      />
-    </td>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          {% elif row["priority"] == 2:%}
+          <option disabled value="Priority">Priority</option>
+          <option value="1">1</option>
+          <option selected value="1">2</option>
 
-    <td class="text-center">
-      <input
-        type="date"
-        id="start"
-        name="trip-start"
-        value="2018-07-22"
-        min="2018-01-01"
-        max="2018-12-31"
-        disabled
-      />
-    </td>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          {% elif row["priority"] == 3:%}
+          <option disabled value="Priority">Priority</option>
+          <option value="1">1</option>
+          <option value="1">2</option>
 
-    <td class="text-center">
-      <select class="form-select" name="status" id="status1">
-        <option value="done-on-time">Done-On-Time</option>
-        <option value="done">Done</option>
-        <option selected value="not-set">Not-Set</option>
-        <option value="missed">Missed</option>
-      </select>
-    </td>
+          <option selected value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
 
-    <td class="text-center">
-      <a href="#" class="btn btn-dark">Edit</a>
-    </td>
-    <td class="text-center">
-      <a href="#" class="btn btn-danger">Delete</a>
-    </td>
+          {% elif row["priority"] == 4:%}
+          <option disabled value="Priority">Priority</option>
+          <option value="1">1</option>
+          <option value="1">2</option>
+          <option value="3">3</option>
+          <option selected value="4">4</option>
+          <option value="5">5</option>
+
+          {% elif row["priority"] == 5:%}
+          <option disabled value="Priority">Priority</option>
+          <option value="1">1</option>
+          <option value="1">2</option>
+          <option selected value="3">3</option>
+          <option value="4">4</option>
+          <option selected value="5">5</option>
+          {% endif%}
+        </select>
+      </td>
+
+      <td class="text-center">
+        <input type="date" id="start" name="trip-start"
+        value={{row["start_date"]}} disabled />
+      </td>
+
+      <td class="text-center">
+        <input type="date" id="start" name="trip-start"
+        value={{row["end_date"]}} />
+      </td>
+
+      <td class="text-center">
+        <select class="form-select" name="status" id="status1">
+          {%if row["status"] == "Done-On-Time":%}
+          <option selected value="done-on-time">Done-On-Time</option>
+          <option value="done">Done</option>
+          <option value="not-set">Not-Set</option>
+          <option value="missed">Missed</option>
+
+          {%elif row["status"] == "Done" :%}
+          <option value="done-on-time">Done-On-Time</option>
+          <option selected value="done">Done</option>
+          <option value="not-set">Not-Set</option>
+          <option value="missed">Missed</option>
+
+          {%elif row["status"] == "Not-Set" :%}
+          <option value="done-on-time">Done-On-Time</option>
+          <option value="done">Done</option>
+          <option selected value="not-set">Not-Set</option>
+          <option value="missed">Missed</option>
+
+          {%elif row["status"] == "Missed" :%}
+          <option value="done-on-time">Done-On-Time</option>
+          <option value="done">Done</option>
+          <option value="not-set">Not-Set</option>
+          <option selected value="missed">Missed</option>
+
+          {% endif %}
+        </select>
+      </td>
+
+      <td class="text-center">
+        <a href="#" class="btn btn-success">Save</a>
+      </td>
+      <td class="text-center">
+        <a href="#" class="btn btn-dark">Edit</a>
+      </td>
+      <td class="text-center">
+        <a href="#" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+
+    {% endfor%}
   </tbody>
 </table>
 
