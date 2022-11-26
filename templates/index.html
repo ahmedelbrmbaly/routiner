@@ -9,7 +9,6 @@ main%}
     <th class="text-center">Start Date</th>
     <th class="text-center">End Date</th>
     <th class="text-center">Status</th>
-    <th class="text-center">Save</th>
     <th class="text-center">Edit</th>
     <th class="text-center">Delete</th>
   </thead>
@@ -18,7 +17,7 @@ main%}
     {% for row in rows:%}
     <tr>
       <td class="table-dark">
-        <a href="#" class="btn btn-dark">{{row["name"]}}</a>
+        <a href="{{url_for('edit', routine_id= row["ID"])}}" class="btn btn-dark">{{row["name"]}}</a>
       </td>
 
       <td class="text-center">
@@ -47,7 +46,7 @@ main%}
       </td>
 
       <td class="text-center">
-        <select class="form-select" name="priority" id="priority1">
+        <select class="form-select" name="priority" id="priority" disabled>
           {%if row["priority"] == 1: %}
           <option disabled value="Priority">Priority</option>
           <option selected value="1">1</option>
@@ -98,12 +97,12 @@ main%}
       </td>
 
       <td class="text-center">
-        <input type="date" id="start" name="trip-start"
-        value={{row["end_date"]}} />
+        <input  disabled type="date" id="start" name="trip-start"
+        value={{row["end_date"]}}  />
       </td>
 
       <td class="text-center">
-        <select class="form-select" name="status" id="status1">
+        <select class="form-select" name="status" id="status1" disabled>
           {%if row["status"] == "Done-On-Time":%}
           <option selected value="done-on-time">Done-On-Time</option>
           <option value="done">Done</option>
@@ -132,12 +131,10 @@ main%}
         </select>
       </td>
 
-      <td class="text-center">
-        <a href="#" class="btn btn-success">Save</a>
-      </td>
+
       <td class="text-center">
         <form  action="{{url_for('edit', routine_id= row["ID"])}}">
-          <button type="submit" class="btn btn-dark">Edit</button>
+          <button type="submit" class="btn btn-success">Update</button>
           
         </form>
      

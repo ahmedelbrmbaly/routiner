@@ -273,12 +273,3 @@ def edit(routine_id):
         return render_template("edit.html",routine_id=routine_id, row= row)
 
 
-
-@app.route('/<int:routine_id>/update', methods=['POST'])
-@login_required
-def update(routine_id):
-    
-    if request.method == 'POST':
-        rows = db.execute("DELETE FROM routines WHERE ID = ?", routine_id)
-
-        return redirect(url_for('index'))
