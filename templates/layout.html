@@ -57,71 +57,72 @@
         />
       </symbol>
     </svg>
+    <header>
+      <!-- NAV -->
+      <nav
+        class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
+        aria-label="Fourth navbar example"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ url_for('index') }}">Routiner</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarsExample04"
+            aria-controls="navbarsExample04"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-    <!-- NAV -->
-    <nav
-      class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"
-      aria-label="Fourth navbar example"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Routiner</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarsExample04"
-          aria-controls="navbarsExample04"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbar">
-          {% if session["user_id"] %}
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('index') }}">Home</a>
-              <!-- <a
+          <div class="collapse navbar-collapse" id="navbar">
+            {% if session["user_id"] %}
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+                <!-- <a
               class="nav-link active"
               aria-current="page"
               href="{{ url_for('index') }}"
               >Home</a
             > -->
-            </li>
+              </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('add') }}">New Task</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('add') }}">Add</a>
+              </li>
 
-            <!-- <li class="nav-item">
+              <!-- <li class="nav-item">
               <a class="nav-link disabled">Disabled</a>
             </li> -->
-          </ul>
+            </ul>
 
-          <ul class="navbar-nav ms-auto mt-2">
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Log Out</a>
-            </li>
-          </ul>
-          {% else %}
+            <ul class="navbar-nav ms-auto mt-2">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Log Out</a>
+              </li>
+            </ul>
+            {% else %}
 
-          <ul class="navbar-nav ms-auto mt-2">
-            <li class="nav-item">
-              <a class="nav-link" href="/register">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">Log In</a>
-            </li>
-          </ul>
+            <ul class="navbar-nav ms-auto mt-2">
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Log In</a>
+              </li>
+            </ul>
 
-          {% endif %}
+            {% endif %}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
     <br />
     <br />
 
@@ -143,7 +144,7 @@
 
     <!-- Footer -->
     <footer
-      class="footer d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
+      class="fixed-bottom footer d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
     >
       <div class="col-md-4 d-flex align-items-center">
         <a

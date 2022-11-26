@@ -1,4 +1,124 @@
-# Routiner
+# Routiner: CS50 Final Project
+
+### Video Demo: <URL HERE>
+
+### Description:
+
+Routiner is a website that helps user to manage their to-do list.
+A User can
+
+- Add, Delete, or Edit tasks
+- Choose a prioirty
+- Set start date
+- Set end date
+- Change status
+
+<br>
+
+# Libraries
+
+- `cs50`
+
+  - `SQL`
+
+- `flask`
+
+  - `Flask`
+  - `flash`
+  - `redirect`
+  - `render_template`
+  - `request`
+  - `session` -` url_for`
+
+- `flask_session`
+
+  - `Session`
+
+- `tempfile`
+
+  - `mkdtemp`
+
+- `werkzeug.security`
+
+  - `check_password_hash`
+  - `generate_password_hash`
+
+- `pyIsEmail` library used to validate email address
+
+  - `is_email`
+
+- `datetime`
+
+  - `datetime`
+
+- `calendar`
+
+- `os`
+
+- `requests`
+
+- `urllib.parse`
+
+# Files Structure
+
+├── Database schema - Copy.drawio >> DataBase light Deisgn<br>
+├── Database schema - Copy.drawio.png >> DataBase light Deisgn<br>
+├── Database schema.drawio >> DataBase Heavy Deisgn<br>
+├── Database schema.drawio.png >> DataBase Heavy Deisgn <br>
+├── README.md >> Readme file<br>
+├── app.py >> Flask Application<br>
+├── helper.py >> Python helper file<br>
+├── routiner.db >> database<br>
+├── static<br>
+│ └── logo.png >> wesite logo<br>
+└── templates<br>
+├── add.html<br>
+├── edit.html<br>
+├── index.html<br>
+├── layout.html<br>
+├── login.html<br>
+├── profile.html<br>
+└── register.html<br>
+
+# Templates
+
+- [x] Layout
+- [x] Index
+- [x] Registration
+- [x] Login
+- [x] Profile
+- [x] Add
+- [x] Edit
+- [x] Profile
+
+# Routes
+
+- [x] Index
+- [x] Registration
+- [x] Login
+- [x] Profile
+- [x] Add
+- [x] Edit
+- [x] Profile
+- [x] Delete
+
+# CRUD Operations Implemented
+
+- `Create`
+  - New user
+  - New Task
+- `Read`
+
+  - User details
+  - Task details
+
+- `Update`
+
+  - User Details
+  - Task details
+
+- `Delete`
+  - Task Details
 
 # Database Deigning - Light Version
 
@@ -167,14 +287,3 @@
     ALTER TABLE routines
     add check(priority>=1 and priority<=5>);
   ```
-
-# ِApp notes
-
-- `pyIsEmail` library used to validate email address
-
-# Templates
-
-- [x] Index
-- [x] Registration
-- [x] Login
-- [x] Profile
