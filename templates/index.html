@@ -136,10 +136,18 @@ main%}
         <a href="#" class="btn btn-success">Save</a>
       </td>
       <td class="text-center">
-        <a href="#" class="btn btn-dark">Edit</a>
+        <form  action="{{url_for('edit', routine_id= row["ID"])}}">
+          <button type="submit" class="btn btn-dark">Edit</button>
+          
+        </form>
+     
       </td>
       <td class="text-center">
-        <a href="#" class="btn btn-danger">Delete</a>
+        
+        <form  action="{{url_for('deleteRoutine', routine_id= row["ID"])}}" method='post'>
+          <button type="submit" class="btn btn-danger">Delete</button>
+          
+        </form>
       </td>
     </tr>
 

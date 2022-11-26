@@ -188,7 +188,7 @@ def index():
 @app.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
-    status = ["Done On Time", "Done","Not Set", "Missed"]
+    status = ["Done-On-Time", "Done","Not-Set", "Missed"]
 
     if request.method == "POST":
         newRoutine = {}
@@ -220,3 +220,65 @@ def add():
 
 
 
+@app.route('/<int:routine_id>/delete', methods=['POST'])
+@login_required
+def deleteRoutine(routine_id):
+    
+    if request.method == 'POST':
+        rows = db.execute("DELETE FROM routines WHERE ID = ? AND user_id=?", routine_id, session["user_id"])
+
+        return redirect(url_for('index'))
+   
+   
+
+@app.route("/<int:routine_id>/edit", methods=["GET", "POST"])
+@login_required
+def edit(routine_id):
+    status = ["Done-On-Time", "Done","Not-Set", "Missed"]
+
+    rows = db.execute("SELECT * FROM routines WHERE ID = ?", routine_id)
+    row = rows[0]
+    if request.method == "POST":
+        newRoutine = {}
+        if not request.form.get("name"):
+            flash("Please Enter Task Name")
+            return redirect(url_for('add'))
+        else:
+            newRoutine["name"] = request.form.get("name")
+            
+            newRoutine["description"] = request.form.get("description") if request.form.get("description") else ""
+            
+            if not request.form.get("priority"):
+               newRoutine["priority"] = 1
+
+            elif request.form.get("priority").isdigit() and int( request.form.get("priority")) > 0  and int( request.form.get("priority")) < 6:
+                newRoutine["priority"] = int(request.form.get("priority"))
+
+            else:
+                 newRoutine["priority"] = 1
+                
+
+            newRoutine["start-date"] = request.form.get("start-date") if request.form.get("start-date") else datetime.now().strftime('%Y-%m-%d')
+
+            newRoutine["end-date"] = request.form.get("end-date") if request.form.get("end-date") else ""
+
+            newRoutine["status"] = request.form.get("status") if request.form.get("status") in status else "Not-Set"
+        
+        
+
+        db.execute("UPDATE routines set name=?, description=?, priority=?,start_date=?, end_date=?, status=? where ID= ? AND user_id=?",newRoutine["name"], newRoutine["description"], newRoutine["priority"], newRoutine["start-date"], newRoutine["end-date"], newRoutine["status"], routine_id, session["user_id"])
+        flash("Changes were saved!")
+        return redirect("/")      
+    else:
+        return render_template("edit.html",routine_id=routine_id, row= row)
+
+
+
+@app.route('/<int:routine_id>/update', methods=['POST'])
+@login_required
+def update(routine_id):
+    
+    if request.method == 'POST':
+        rows = db.execute("DELETE FROM routines WHERE ID = ?", routine_id)
+
+        return redirect(url_for('index'))

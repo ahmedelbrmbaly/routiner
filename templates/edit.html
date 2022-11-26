@@ -1,0 +1,115 @@
+{% extends "layout.html" %} {% block title %} Edit Task{% endblock %} {% block
+main%}
+
+<!-- add form -->
+<br />
+<form action=""{{url_for('edit', routine_id= row["ID"])}}"" method="post">
+  <div class="mb-3">
+    <input required autocomplete="off" autofocus class="form-control mx-auto
+    w-auto" name="name" type="text" value={{row["name"]}}>
+  </div>
+
+  <div class="mb-3">
+    <textarea
+      name="description"
+      class="form-control mx-auto w-auto"
+      aria-label="With textarea"
+      spellcheck="false"
+      value={{row["description"]}}
+    ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <select class="form-select mx-auto
+    w-auto" name="priority" id="priority1">
+
+      {%if row["priority"] == 1: %}
+      <option disabled value="Priority">Priority</option>
+      <option selected value="1">1</option>
+      <option value="1">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+
+      {% elif row["priority"] == 2:%}
+      <option disabled value="Priority">Priority</option>
+      <option value="1">1</option>
+      <option selected value="1">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+
+      {% elif row["priority"] == 3:%}
+      <option disabled value="Priority">Priority</option>
+      <option value="1">1</option>
+      <option value="1">2</option>
+      <option selected value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+
+      {% elif row["priority"] == 4:%}
+      <option disabled value="Priority">Priority</option>
+      <option value="1">1</option>
+      <option value="1">2</option>
+      <option value="3">3</option>
+      <option selected value="4">4</option>
+      <option value="5">5</option>
+
+      {% elif row["priority"] == 5:%}
+      <option disabled value="Priority">Priority</option>
+      <option value="1">1</option>
+      <option value="1">2</option>
+      <option selected value="3">3</option>
+      <option value="4">4</option>
+      <option selected value="5">5</option>
+      {% endif%}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <input class="form-control mx-auto w-auto" 
+    type="date" id="start-date" name="start-date" value={{row["start_date"]}}
+    />
+  </div>
+
+  <div class="mb-3">
+    <input class="form-control mx-auto w-auto" 
+    type="date" id="end-date" name="start-date" value={{row["end_date"]}}
+    />
+  </div>
+  <div class="mb-3">
+  <select class="form-select  mx-auto w-auto" name="status" id="status1">
+          {%if row["status"] == "Done-On-Time":%}
+          <option selected value="done-on-time">Done-On-Time</option>
+          <option value="done">Done</option>
+          <option value="not-set">Not-Set</option>
+          <option value="missed">Missed</option>
+
+          {%elif row["status"] == "Done" :%}
+          <option value="done-on-time">Done-On-Time</option>
+          <option selected value="done">Done</option>
+          <option value="not-set">Not-Set</option>
+          <option value="missed">Missed</option>
+
+          {%elif row["status"] == "Not-Set" :%}
+          <option value="done-on-time">Done-On-Time</option>
+          <option value="done">Done</option>
+          <option selected value="not-set">Not-Set</option>
+          <option value="missed">Missed</option>
+
+          {%elif row["status"] == "Missed" :%}
+          <option value="done-on-time">Done-On-Time</option>
+          <option value="done">Done</option>
+          <option value="not-set">Not-Set</option>
+          <option selected value="missed">Missed</option>
+
+          {% endif %}
+          </select>
+          
+
+  
+  </div>
+
+  <button class="btn btn-dark" type="submit">Save</button>
+</form>
+{% endblock %}
