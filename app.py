@@ -180,8 +180,14 @@ def profile():
 @login_required
 def index():
     rows = db.execute("SELECT * FROM routines WHERE user_id = ?", session["user_id"])
+    rowIdHash = {}
+    rowId = {}
+    for row in rows:
+        s = 'row'+ str(row['ID'])
+        rowId[row['ID']] = s
+        rowIdHash[row['ID']] = '#' + str( rowId[row['ID']])
    
-    return render_template("index.html", rows=rows )
+    return render_template("index.html", rows=rows, rowId=rowId, rowIdHash=rowIdHash )
 
 
 

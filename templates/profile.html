@@ -11,8 +11,8 @@ main %}
     <br />
     <br />
     <input autocomplete="off" autofocus disabled class="form-control mx-auto
-    w-auto" name="curernt_username" placeholder={{row["user_name"]}} type="text"
-    />
+    w-auto" name="curernt_username" placeholder="{{row['user_name']}}""
+    type="text" />
     <br />
 
     <input
@@ -29,8 +29,15 @@ main %}
     <label> Current Email</label>
     <br />
     <br />
-    <input autocomplete="off" autofocus disabled class="form-control mx-auto
-    w-auto" name="curernt_email" placeholder={{row["email"]}} type="text" />
+    <input
+      autocomplete="off"
+      autofocus
+      disabled
+      class="form-control mx-auto w-auto"
+      name="curernt_email"
+      placeholder="{{row['email']}}"
+      type="text"
+    />
     <br />
 
     <input

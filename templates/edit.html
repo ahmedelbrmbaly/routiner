@@ -3,10 +3,17 @@ main%}
 
 <!-- add form -->
 <br />
-<form action=""{{url_for('edit', routine_id= row["ID"])}}"" method="post">
+<form action="{{url_for('edit', routine_id= row['ID'])}}" method="post">
   <div class="mb-3">
-    <input required autocomplete="off" autofocus class="form-control mx-auto
-    w-auto" name="name" type="text" value={{row["name"]}}>
+    <input
+      required
+      autocomplete="off"
+      autofocus
+      class="form-control mx-auto w-auto"
+      name="name"
+      type="text"
+      value="{{row['name']}}"
+    />
   </div>
 
   <div class="mb-3">
@@ -15,14 +22,14 @@ main%}
       class="form-control mx-auto w-auto"
       aria-label="With textarea"
       spellcheck="false"
-      value={{row["description"]}}
-    ></textarea>
+    >
+{{row['description']}}
+  </textarea
+    >
   </div>
 
   <div class="mb-3">
-    <select class="form-select mx-auto
-    w-auto" name="priority" id="priority1">
-
+    <select class="form-select mx-auto w-auto" name="priority" id="priority1">
       {%if row["priority"] == 1: %}
       <option disabled value="Priority">Priority</option>
       <option selected value="1">1</option>
@@ -67,47 +74,47 @@ main%}
   </div>
 
   <div class="mb-3">
-    <input class="form-control mx-auto w-auto" 
-    type="date" id="start-date" name="start-date" value={{row["start_date"]}}
+    <input
+      class="form-control mx-auto w-auto"
+      type="date"
+      id="start-date"
+      name="start-date"
+      value="{{row['start_date']}}"
     />
   </div>
 
   <div class="mb-3">
-    <input class="form-control mx-auto w-auto" 
-    type="date" id="end-date" name="start-date" value={{row["end_date"]}}
-    />
+    <input class="form-control mx-auto w-auto" type="date" id="end-date"
+    name="start-date" value="{{row['end_date']}}"" />
   </div>
   <div class="mb-3">
-  <select class="form-select  mx-auto w-auto" name="status" id="status1">
-          {%if row["status"] == "Done-On-Time":%}
-          <option selected value="done-on-time">Done-On-Time</option>
-          <option value="done">Done</option>
-          <option value="not-set">Not-Set</option>
-          <option value="missed">Missed</option>
+    <select class="form-select mx-auto w-auto" name="status" id="status1">
+      {%if row["status"] == "Done-On-Time":%}
+      <option selected value="done-on-time">Done-On-Time</option>
+      <option value="done">Done</option>
+      <option value="not-set">Not-Set</option>
+      <option value="missed">Missed</option>
 
-          {%elif row["status"] == "Done" :%}
-          <option value="done-on-time">Done-On-Time</option>
-          <option selected value="done">Done</option>
-          <option value="not-set">Not-Set</option>
-          <option value="missed">Missed</option>
+      {%elif row["status"] == "Done" :%}
+      <option value="done-on-time">Done-On-Time</option>
+      <option selected value="done">Done</option>
+      <option value="not-set">Not-Set</option>
+      <option value="missed">Missed</option>
 
-          {%elif row["status"] == "Not-Set" :%}
-          <option value="done-on-time">Done-On-Time</option>
-          <option value="done">Done</option>
-          <option selected value="not-set">Not-Set</option>
-          <option value="missed">Missed</option>
+      {%elif row["status"] == "Not-Set" :%}
+      <option value="done-on-time">Done-On-Time</option>
+      <option value="done">Done</option>
+      <option selected value="not-set">Not-Set</option>
+      <option value="missed">Missed</option>
 
-          {%elif row["status"] == "Missed" :%}
-          <option value="done-on-time">Done-On-Time</option>
-          <option value="done">Done</option>
-          <option value="not-set">Not-Set</option>
-          <option selected value="missed">Missed</option>
+      {%elif row["status"] == "Missed" :%}
+      <option value="done-on-time">Done-On-Time</option>
+      <option value="done">Done</option>
+      <option value="not-set">Not-Set</option>
+      <option selected value="missed">Missed</option>
 
-          {% endif %}
-          </select>
-          
-
-  
+      {% endif %}
+    </select>
   </div>
 
   <button class="btn btn-dark" type="submit">Update</button>
