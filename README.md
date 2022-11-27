@@ -1,6 +1,6 @@
 # Routiner: CS50 Final Project
 
-### <a herf= "https://youtu.be/UYgT5W_52CA"> Video Demo </a>
+### [Video Demo](https://youtu.be/UYgT5W_52CA)
 
 ### Description:
 
@@ -13,7 +13,7 @@ A User can
 - Set end date
 - Change status
 
-### Contact me: <a herf= "https://www.linkedin.com/in/ahmed-yasser-elbrmbaly/"> Linked In </a>
+### Contact me: [Linked In](https://www.linkedin.com/in/ahmed-yasser-elbrmbaly/)
 
 <br>
 
